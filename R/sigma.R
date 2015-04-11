@@ -1,11 +1,19 @@
 
+# sigmajs graph widget
+#' @import rgexf
+#' @export
+edgetable_to_gexf = function(netdf){
+  # one-liner to convert edgetable to 
+  do.call(what = write.gexf, args = edge.list(netdf))
+}
+
 #' @import htmlwidgets
 #' @export
 sigma <- function(gexf, drawEdges = TRUE, drawNodes = TRUE,
                   width = NULL, height = NULL) {
   
-  # read the gexf file
-  data <- paste(readLines(gexf), collapse="\n")
+  # Convert the gexf object to character vector
+  data <- gexf$graph
   
   # create a list that contains the settings
   settings <- list(
