@@ -7,8 +7,17 @@ HTMLWidgets.widget({
   initialize: function(el, width, height) {
    
     // create our sigma object and bind it to the element
-    var sig = new sigma(el.id);
-    
+    sig = new sigma({
+  renderer: {
+    container: document.getElementById(el.id),
+    type: 'canvas'
+  },
+  settings: {
+    edgeLabelSize: 'proportional',
+    minArrowSize: '8',
+    defaultEdgeType: 'curvedArrow'
+  }
+});
     // return it as part of our instance data
     return {
       sig: sig
@@ -23,8 +32,9 @@ HTMLWidgets.widget({
     
     // apply settings
     for (var name in x.settings)
+    {
       instance.sig.settings(name, x.settings[name]);
-    
+    }
     // update the sigma instance
     sigma.parsers.gexf(
       data,          // parsed gexf data
