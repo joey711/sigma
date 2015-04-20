@@ -23,8 +23,9 @@ HTMLWidgets.widget({
     
     // apply settings
     for (var name in x.settings)
+    {
       instance.sig.settings(name, x.settings[name]);
-    
+    }
     // update the sigma instance
     sigma.parsers.gexf(
       data,          // parsed gexf data
