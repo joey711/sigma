@@ -10,7 +10,7 @@ edgetable_to_gexf = function(netdf){
 #' @import htmlwidgets
 #' @export
 sigma <- function(gexf, drawEdges = TRUE, drawNodes = TRUE,
-                  width = NULL, height = NULL, arrowSize='7', edgeType='line') {
+                  width = NULL, height = NULL, arrowSize='7', edgeType='curvedArrow') {
   
   # Convert the gexf object to character vector
   data <- gexf$graph
@@ -24,8 +24,6 @@ sigma <- function(gexf, drawEdges = TRUE, drawNodes = TRUE,
     defaultLabelColor = '#006adb'
   )
   
-
-  print(settings);
 
   # pass the data and settings using 'x'
   x <- list(
