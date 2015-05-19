@@ -15,7 +15,10 @@ HTMLWidgets.widget({
   settings: {
     edgeLabelSize: 'proportional',
     minEdgeSize:1,
-    maxEdgeSize:3,
+    maxEdgeSize:6,
+    defaultEdgeLabelSize: 12,
+    minNodeSize:3,
+    maxNodeSize:8,
     edgeLabelThreshold: 4
   }
 });
@@ -47,6 +50,7 @@ HTMLWidgets.widget({
 
 
     console.log(JSON.stringify(g, null, 2));
+    instance.sig.graph.clear();
     instance.sig.graph.read(g);
     instance.sig.refresh();
 
