@@ -1,78 +1,61 @@
-
-sigma_json_generator <- function(nodeDataframe,edgeDataframe)
-{
-  
-  edges = edgeDataframe
-  nodes = nodeDataframe
-  library(rjson)
-  #preset colors
-  microbeColor = "#3288bd"
-  compoundColor = "#ff9d00"
-  hostColor = "#e31a1c"
-  
-  
-  
-  
-  #Generate edge data for sigma
-  i = 1
-  edges_check = list()
-  
-  for (so in edges$source)
-  {
-    edge = edges[i,]
-    
-    backward = paste(edge$target,edge$source,sep="")
-    forward = paste(edge$source,edge$target,sep="")
-    #Have we already added an edge this pair of nodes?
-    if (backward %in% names(edges_check))
-    {
-      #It's a bi-directional edge
-      edges_check[[backward]][['type']] = 'parallel'
-      edges_check[[backward]][['label']] = paste(edge$source, edge$target, sep="<->")
-    }
-    else
-    {
-      edges_check[[forward]] = list()
-      edgeLabel = paste(edge$source, edge$target, sep="->")
-      #It's a new edge
-      edges_check[[forward]][['id']] = paste("e",toString(i),sep="")
-      edges_check[[forward]][['label']] = edgeLabel
-      edges_check[[forward]][['source']] = toString(edge$source)
-      edges_check[[forward]][['target']] = toString(edge$target)
-      edges_check[[forward]][['type']] = 'tapered'
-      edges_check[[forward]][['size']] = 1
-    }
-    
-    i = i + 1
+#' Make JSON-formatted sigma network data
+#'
+#' Just need the node \code{\link{data.frame}}
+#' and the edge \code{\link{data.frame}}.
+#'
+#' @param nodes we need to document the required columns
+#'
+#' @param edges same thing here.
+#'
+#' @param colorPalette Color Palette.
+#'
+#' @import jsonlite
+#' @import data.table
+#' @export
+sigma_json_generator <- function(nodes, edges,
+                                 colorPalette = list(
+                                   Microbe = "#3288bd",
+                                   Compound = "#ff9d00",
+                                   Host = "#e31a1c")
+                                 ){
+  # Nodes
+  if(!any(colnames(nodes) == "label")){
+    nodes$label <- nodes$id
   }
-  
-  nodes_check = list()
-  #Generate node data for sigma
-  i = 1
-  for (node in nodes$id)
-  {
-    nodes_check[[node]] = list()
-    nodes_check[[node]][['id']] = node
-    if (nodes[i,]['type'] == 'microbe')
-    {
-      nodeColor = microbeColor
-    }
-    else if (nodes[i,]['type'] == 'host')
-    {
-      nodeColor = hostColor
-    }
-    else
-    {
-      nodeColor = compoundColor
-    }
-    nodes_check[[node]][['color']] = nodeColor
-    nodes_check[[node]][['x']] = nodes[i,][['x']]
-    nodes_check[[node]][['y']] = nodes[i,][['y']]
-    nodes_check[[node]][['size']] = nodes[i,][['size']]
-    i = i + 1
+  nodes$color <- unlist(colorPalette[as.character(nodes$type)])
+  # Edges
+  colnames(edges)[colnames(edges) == "source"] <- "sources"
+  edges$sources <- as.character(edges$sources)
+  edges$target <- as.character(edges$target)
+  edges$size <- 1
+  edges$type <- "tapered"
+  edges$id <- paste0("e", 1:nrow(edges))
+  edges <- transform(edges, label = paste(sources, target, sep="->"))
+  # Remove duplicated edge entries, label them as parallel
+  edges$nodeKey <- apply(edges, 1, function(x){
+    paste(sort(c(x["sources"], x["target"])), collapse = "___")
+  })
+  message("nodeKey: \n", paste0(edges$nodeKey, collapse = "\n"))
+  duplicateKeysLogical = duplicated(edges$nodeKey)
+message("parallel key:", edges$nodeKey[duplicateKeysLogical])
+  if(any(duplicateKeysLogical)){
+    parallelKeys = unique(edges$nodeKey[duplicateKeysLogical])
+    edges <- edges[!duplicateKeysLogical, ]
+    edges[edges$nodeKey %in% parallelKeys, ]$type <- "parallel"
+    # Use data.table to clean up this syntax
+    edgesdt = data.table(edges)
+    edgesdt[type == "parallel", label := paste(sources, target, sep="<->")]
+  } else {
+    # Use data.table to clean up this syntax
+    edgesdt = data.table(edges)
   }
-  
-  json_combined = toJSON(list("nodes"=unname(nodes_check),"edges"=unname(edges_check)))
-  
-  return(json_combined) 
+  # Put back to source just before sending out
+  setnames(edgesdt, "sources", "source")
+  # Make the combine JSON-formatted character to pass to sigma
+  json_combined = toJSON(list(
+    nodes = nodes,
+    edges = edgesdt
+    ))
+  #prettify(json_combined)
+  return(json_combined)
 }

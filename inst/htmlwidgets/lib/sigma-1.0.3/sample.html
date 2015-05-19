@@ -71,7 +71,7 @@ var i,
     {
       "id": "ras",
       "label": "Ras",
-      "x": 2,
+      "x": 2.00001,
       "y": 2.5,
       "size": 2,
       color: "#e31a1c"
@@ -84,7 +84,7 @@ var i,
       "id": "e0",
       "source": "glu",
       "target": "wnt",
-      size:4,
+      size:1,
       type:"tapered",
       color: "#e31a1c",
       label: "Glu -> Wnt"
@@ -94,7 +94,7 @@ var i,
       "id": "e1",
       "source": "glu",
       "target": "mapk",
-      size:3,
+      size:1,
       type:"tapered",
       color: "#e31a1c",
       label: "Glu -> MAPK"    
@@ -104,7 +104,7 @@ var i,
       "id": "e2",
       "source": "glu",
       "target": "ras",
-      size:3,
+      size:1,
       type:"tapered",
       color: "#e31a1c",
       label: "Glu -> Ras"
@@ -115,7 +115,7 @@ var i,
       "id": "e4",
       "source": "clo",
       "target": "glu",
-      size:3,
+      size:1,
       type:"tapered",
       color:"#3288bd",
       label: "Clostridia -> Glu"
@@ -144,11 +144,14 @@ s = new sigma({
   settings: {
     edgeLabelSize: 'proportional',
     minArrowSize: '8',
-    defaultLabelColor: '#fff',
+    defaultLabelColor: '#000',
     defaultEdgeType: 'arrow',
+    defaultEdgeLabelSize: 12,
     minEdgeSize:1,
     maxEdgeSize:6,
-    edgeLabelThreshold: 2
+    minNodeSize:3,
+    maxNodeSize:8,
+    edgeLabelThreshold: 4
   }
 });
 </script>
