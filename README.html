@@ -82,16 +82,17 @@ img {
 nodes &lt;- data.frame(
   id = c(&quot;Glutamic Acid&quot;, &quot;E. coli&quot;, &quot;Clostridia dificile&quot;, &quot;Wnt&quot;, &quot;MAPK&quot;, &quot;Ras&quot;),
   type = c(&quot;compound&quot;,&quot;microbe&quot;,&quot;microbe&quot;,&quot;host&quot;,&quot;host&quot;,&quot;host&quot;),
-  size=c(4,2,2,3,2,1)
+  size=c(4,2,2,3,2,1),
+  x=c(2,1,1,3,3,3),
+  y=c(2,1.5,3,2,3,2.5)
   )
 s = sigma_json_generator(nodes,edges)</code></pre>
-<pre><code>## Loading required package: igraph</code></pre>
 <div id="call-sigma-htmlwidgets-package-with-the-example-data." class="section level3">
 <h3>Call Sigma HTMLwidgets package with the example data.</h3>
 <pre class="r"><code>sigma(s)</code></pre>
-<p><div id="htmlwidget-6309" style="width:672px;height:480px;" class="sigma"></div>
-<script type="application/json" data-for="htmlwidget-6309">{ "x": {
- "data": "{\"nodes\":[{\"id\":\"Glutamic Acid\",\"color\":\"#ff9d00\",\"x\":-2.18085714247929,\"y\":-6.2401788618022,\"size\":4},{\"id\":\"E. coli\",\"color\":\"#3288bd\",\"x\":-0.0747738059315777,\"y\":-4.03832137113091,\"size\":2},{\"id\":\"Clostridia dificile\",\"color\":\"#3288bd\",\"x\":-4.49961300975127,\"y\":-6.7045479266767,\"size\":2},{\"id\":\"Wnt\",\"color\":\"#e31a1c\",\"x\":-3.6361696019607,\"y\":-3.56217026053406,\"size\":3},{\"id\":\"MAPK\",\"color\":\"#e31a1c\",\"x\":0.610729768267022,\"y\":-7.46124481460114,\"size\":2},{\"id\":\"Ras\",\"color\":\"#e31a1c\",\"x\":-2.4925905967214,\"y\":-9.27223047511157,\"size\":1}],\"edges\":[{\"id\":\"e1\",\"label\":\"Glutamic Acid->Wnt\",\"source\":\"Glutamic Acid\",\"target\":\"Wnt\",\"type\":\"tapered\",\"size\":1},{\"id\":\"e2\",\"label\":\"Glutamic Acid->MAPK\",\"source\":\"Glutamic Acid\",\"target\":\"MAPK\",\"type\":\"tapered\",\"size\":1},{\"id\":\"e3\",\"label\":\"Glutamic Acid->Ras\",\"source\":\"Glutamic Acid\",\"target\":\"Ras\",\"type\":\"tapered\",\"size\":1},{\"id\":\"e4\",\"label\":\"Clostridia dificile->Glutamic Acid\",\"source\":\"Clostridia dificile\",\"target\":\"Glutamic Acid\",\"type\":\"tapered\",\"size\":1},{\"id\":\"e5\",\"label\":\"E. coli<->Glutamic Acid\",\"source\":\"Glutamic Acid\",\"target\":\"E. coli\",\"type\":\"parallel\",\"size\":1}]}",
+<p><div id="htmlwidget-427" style="width:672px;height:480px;" class="sigma"></div>
+<script type="application/json" data-for="htmlwidget-427">{ "x": {
+ "data": "{\"nodes\":[{\"id\":\"Glutamic Acid\",\"type\":\"compound\",\"size\":4,\"x\":2,\"y\":2,\"color\":\"#3288bd\"},{\"id\":\"E. coli\",\"type\":\"microbe\",\"size\":2,\"x\":1,\"y\":1.5,\"color\":\"#e31a1c\"},{\"id\":\"Clostridia dificile\",\"type\":\"microbe\",\"size\":2,\"x\":1,\"y\":3,\"color\":\"#e31a1c\"},{\"id\":\"Wnt\",\"type\":\"host\",\"size\":3,\"x\":3,\"y\":2,\"color\":\"#ff9d00\"},{\"id\":\"MAPK\",\"type\":\"host\",\"size\":2,\"x\":3,\"y\":3,\"color\":\"#ff9d00\"},{\"id\":\"Ras\",\"type\":\"host\",\"size\":1,\"x\":3,\"y\":2.5,\"color\":\"#ff9d00\"}],\"edges\":[{\"source\":\"Glutamic Acid\",\"target\":\"Wnt\",\"size\":1,\"type\":\"tapered\",\"id\":\"e1\",\"label\":\"Glutamic Acid->Wnt\",\"nodeKey\":\"Glutamic Acid___Wnt\"},{\"source\":\"Glutamic Acid\",\"target\":\"MAPK\",\"size\":1,\"type\":\"tapered\",\"id\":\"e2\",\"label\":\"Glutamic Acid->MAPK\",\"nodeKey\":\"Glutamic Acid___MAPK\"},{\"source\":\"Glutamic Acid\",\"target\":\"Ras\",\"size\":1,\"type\":\"tapered\",\"id\":\"e3\",\"label\":\"Glutamic Acid->Ras\",\"nodeKey\":\"Glutamic Acid___Ras\"},{\"source\":\"Clostridia dificile\",\"target\":\"Glutamic Acid\",\"size\":1,\"type\":\"tapered\",\"id\":\"e4\",\"label\":\"Clostridia dificile->Glutamic Acid\",\"nodeKey\":\"Clostridia dificile___Glutamic Acid\"},{\"source\":\"Glutamic Acid\",\"target\":\"E. coli\",\"size\":1,\"type\":\"parallel\",\"id\":\"e5\",\"label\":\"Glutamic Acid<->E. coli\",\"nodeKey\":\"E. coli___Glutamic Acid\"}]}",
 "settings": {
  "drawEdges": true,
 "drawNodes": true 

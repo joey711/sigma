@@ -1,11 +1,12 @@
 Package: sigma
 Title: What the Package Does (one line, title case)
-Version: 0.2.1
+Version: 0.2.3
 Authors@R: person("First", "Last", , "first.last@example.com", role = c("aut", "cre"))
 Description: What the package does (one paragraph)
 Depends: R (>= 3.1.1)
 Imports:
     jsonlite (>= 0.9.16),
+    data.table (>= 1.9.4),
     htmlwidgets (>= 0.3.2)
 License: AGPL3
 LazyData: true

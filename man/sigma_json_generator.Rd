@@ -4,12 +4,13 @@
 \alias{sigma_json_generator}
 \title{Make JSON-formatted sigma network data}
 \usage{
-sigma_json_generator(nodeDataframe, edgeDataframe)
+sigma_json_generator(nodeDataframe, edgeDataframe, palette = list(microbe =
+  "#3288bd", compound = "#ff9d00", host = "#e31a1c"))
 }
 \arguments{
-\item{nodeDataframe}{}
+\item{nodeDataframe}{we need to document the required columns}
 
-\item{edgeDataframe}{}
+\item{edgeDataframe}{same thing here.}
 }
 \description{
 Just need the node \code{\link{data.frame}}
