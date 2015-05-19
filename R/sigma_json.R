@@ -1,26 +1,30 @@
-
-sigma_json_generator <- function(nodeDataframe,edgeDataframe)
-{
-  
+#' Make JSON-formatted sigma network data
+#'
+#' Just need the node \code{\link{data.frame}}
+#' and the edge \code{\link{data.frame}}.
+#'
+#' @param nodeDataframe
+#' @param edgeDataframe
+#'
+#' @import jsonlite
+#' @export
+sigma_json_generator <- function(nodeDataframe, edgeDataframe){
+  # require("jsonlite")
   edges = edgeDataframe
   nodes = nodeDataframe
-  library(rjson)
   #preset colors
   microbeColor = "#3288bd"
   compoundColor = "#ff9d00"
   hostColor = "#e31a1c"
-  
-  
-  
-  
+
   #Generate edge data for sigma
   i = 1
   edges_check = list()
-  
+
   for (so in edges$source)
   {
     edge = edges[i,]
-    
+
     backward = paste(edge$target,edge$source,sep="")
     forward = paste(edge$source,edge$target,sep="")
     #Have we already added an edge this pair of nodes?
@@ -42,10 +46,10 @@ sigma_json_generator <- function(nodeDataframe,edgeDataframe)
       edges_check[[forward]][['type']] = 'tapered'
       edges_check[[forward]][['size']] = 1
     }
-    
+
     i = i + 1
   }
-  
+
   nodes_check = list()
   #Generate node data for sigma
   i = 1
@@ -71,8 +75,10 @@ sigma_json_generator <- function(nodeDataframe,edgeDataframe)
     nodes_check[[node]][['size']] = nodes[i,][['size']]
     i = i + 1
   }
-  
-  json_combined = toJSON(list("nodes"=unname(nodes_check),"edges"=unname(edges_check)))
-  
-  return(json_combined) 
+  # Make the combine JSON-formatted character to pass to sigma
+  json_combined = toJSON(list(
+    nodes = unname(nodes_check),
+    edges = unname(edges_check))
+    )
+  return(json_combined)
 }

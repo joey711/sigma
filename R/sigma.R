@@ -1,9 +1,21 @@
-
-sigma <- function(json_data, drawEdges = TRUE, drawNodes = TRUE,
+#' Create the sigma.js object
+#' 
+#' @param jsonData data
+#' @param drawEdges logical
+#' @param drawNodes logical
+#' @param width integer?
+#' @param height integer?
+#' 
+#' @return something awesome
+#' 
+#' @import htmlwidgets
+#' 
+#' @export
+sigma <- function(jsonData, drawEdges = TRUE, drawNodes = TRUE,
                   width = NULL, height = NULL) {
   
   # Convert the gexf object to character vector
-  data <- json_data
+  data <- jsonData
   
   # create a list that contains the settings
   settings <- list(
@@ -19,9 +31,15 @@ sigma <- function(json_data, drawEdges = TRUE, drawNodes = TRUE,
   )
   
   # create the widget
-  htmlwidgets::createWidget("sigma", x, width = width, height = height)
+  createWidget("sigma", x, width = width, height = height)
 }
 
+#' The Shiny widget output thingy
+#' 
+#' @param outputId character string
+#' @param width duh
+#' @param height duh
+#' 
 #' @export
 sigmaOutput <- function(outputId, width = "100%", height = "400px") {
   shinyWidgetOutput(outputId, "sigma", width, height, package = "sigma")
