@@ -21,3 +21,13 @@ sigma <- function(json_data, drawEdges = TRUE, drawNodes = TRUE,
   # create the widget
   htmlwidgets::createWidget("sigma", x, width = width, height = height)
 }
+
+#' @export
+sigmaOutput <- function(outputId, width = "100%", height = "400px") {
+  shinyWidgetOutput(outputId, "sigma", width, height, package = "sigma")
+}
+#' @export
+renderSigma <- function(expr, env = parent.frame(), quoted = FALSE) {
+  if (!quoted) { expr <- substitute(expr) } # force quoted
+  shinyRenderWidget(expr, sigmaOutput, env, quoted = TRUE)
+}
