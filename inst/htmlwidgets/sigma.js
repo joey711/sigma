@@ -14,8 +14,9 @@ HTMLWidgets.widget({
   },
   settings: {
     edgeLabelSize: 'proportional',
-    minArrowSize: '8',
-    defaultEdgeType: 'curvedArrow'
+    minEdgeSize:1,
+    maxEdgeSize:3,
+    edgeLabelThreshold: 3
   }
 });
     // return it as part of our instance data
@@ -27,23 +28,29 @@ HTMLWidgets.widget({
   renderValue: function(el, x, instance) {
       
     // parse gexf data
-    var parser = new DOMParser();
+/*    var parser = new DOMParser();
     var data = parser.parseFromString(x.data, "application/xml");
-    
+*/    
+    var data = x.data
     // apply settings
     for (var name in x.settings)
     {
       instance.sig.settings(name, x.settings[name]);
     }
+
+    jdata = JSON.parse(data);
+    nodeData = jdata['nodes'];
+    edgeData = jdata['edges'];
+    g = {nodes: nodeData, edges: edgeData};
+    console.log(g);
     // update the sigma instance
-    sigma.parsers.gexf(
-      data,          // parsed gexf data
-      instance.sig,  // sigma instance we created in initialize
-      function() {
-        // need to call refresh to reflect new settings and data
-        instance.sig.refresh();
-      }
-    );
+
+    
+    console.log(JSON.stringify(g, null, 2));
+    instance.sig.graph.read(g);
+    instance.sig.refresh();
+    
+
   },
   
   resize: function(el, width, height, instance) {
