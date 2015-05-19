@@ -1,0 +1,32 @@
+---
+title: "Sigma htmlwidgets package readme and example"
+output: html_document
+---
+
+```{r libraries}
+library("sigma")
+```
+
+## Generate example data, and call R function
+
+Define example data
+
+```{r}
+edges <- data.frame(
+  "source"=c("Glutamic Acid", "Glutamic Acid", "Glutamic Acid", 
+             "Clostridia dificile","Glutamic Acid", "E. coli"),
+  "target"=c("Wnt", "MAPK", "Ras", "Glutamic Acid", "E. coli", "Glutamic Acid")
+)
+nodes <- data.frame(
+  id = c("Glutamic Acid", "E. coli", "Clostridia dificile", "Wnt", "MAPK", "Ras"),
+  type = c("compound","microbe","microbe","host","host","host"),
+  size=c(4,2,2,3,2,1)
+  )
+s = sigma_json_generator(nodes,edges)
+```
+
+### Call Sigma HTMLwidgets package with the example data.
+
+```{r}
+sigma(s)
+```
