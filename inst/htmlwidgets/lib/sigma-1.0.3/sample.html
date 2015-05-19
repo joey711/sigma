@@ -1,0 +1,156 @@
+<html>
+<head>
+<style type="text/css">
+  #container {
+    max-width: 100%;
+    height: 100%;
+    margin: auto;
+  }
+</style>
+</head>
+<body style="">
+<div id="container" style=""></div>
+<script src="./sigma.min.js"></script>
+<script src="./plugins/sigma.parsers.json.min.js"></script>
+<script src="./plugins/sigma.renderers.customEdgeShapes.min.js"></script>
+<script src="./plugins/sigma.renderers.edgeLabels.min.js"></script>
+
+
+<script>
+/**
+ * This example shows the available edge label renderers for the canvas
+ * renderer.
+ */
+var i,
+    s,
+    N = 30,
+    E = 50,
+    g = {
+  "nodes": [
+    {
+      "id": "glu",
+      "label": "Glutamic Acid",
+      "x": 2,
+      "y": 2,
+      "size": 3,
+      color:"#ff9d00"
+    },
+    {
+      "id": "eco",
+      "label": "E. coli",
+      "x": 1,
+      "y": 1.5,
+      "size": 2,
+      color:"#3288bd",
+
+    },
+    {
+      "id": "clo",
+      "label": "C. dificile",
+      "x": 1,
+      "y": 3,
+      "size": 1,
+      color:"#3288bd"
+    },
+    {
+      "id": "mapk",
+      "label": "MAPK",
+      "x": 3,
+      "y": 2,
+      "size": 1,
+      color: "#e31a1c",
+    },
+    {
+      "id": "wnt",
+      "label": "WNT",
+      "x": 3,
+      "y": 3,
+      "size": 3,
+      color: "#e31a1c"
+    },
+    {
+      "id": "ras",
+      "label": "Ras",
+      "x": 2,
+      "y": 2.5,
+      "size": 2,
+      color: "#e31a1c"
+    },
+
+
+  ],
+  "edges": [
+    {
+      "id": "e0",
+      "source": "glu",
+      "target": "wnt",
+      size:4,
+      type:"tapered",
+      color: "#e31a1c",
+      label: "Glu -> Wnt"
+
+    },
+    {
+      "id": "e1",
+      "source": "glu",
+      "target": "mapk",
+      size:3,
+      type:"tapered",
+      color: "#e31a1c",
+      label: "Glu -> MAPK"    
+
+    },
+    {
+      "id": "e2",
+      "source": "glu",
+      "target": "ras",
+      size:3,
+      type:"tapered",
+      color: "#e31a1c",
+      label: "Glu -> Ras"
+
+
+    },
+        {
+      "id": "e4",
+      "source": "clo",
+      "target": "glu",
+      size:3,
+      type:"tapered",
+      color:"#3288bd",
+      label: "Clostridia -> Glu"
+    },
+        {
+      "id": "e5",
+      "source": "glu",
+      "target": "eco",
+      size:1,
+      type:"parallel",
+      color:"#3288bd",
+      label: "Glu <-> E. Coli"
+
+
+    }
+  ]
+};
+
+// Instantiate sigma:
+s = new sigma({
+  graph: g,
+  renderer: {
+    container: document.getElementById('container'),
+    type: 'canvas'
+  },
+  settings: {
+    edgeLabelSize: 'proportional',
+    minArrowSize: '8',
+    defaultLabelColor: '#fff',
+    defaultEdgeType: 'arrow',
+    minEdgeSize:1,
+    maxEdgeSize:6,
+    edgeLabelThreshold: 2
+  }
+});
+</script>
+</body>
+</html>

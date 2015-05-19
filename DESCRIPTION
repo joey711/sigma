@@ -1,12 +1,8 @@
 Package: sigma
-Type: Package
-Title: Interface to sigma.js Graph Visualization Library
-Version: 1.2
-Date: 2015-04-10
-Author: Alexis Jacomy and JJ Allaire
-Maintainer: JJ Allaire <jj@rstudio.com>
-Description: Interface to sigma.js Network Visualization Library
-License: MIT + file LICENSE
-Imports:
-    htmlwidgets (>= 0.3),
-    rgexf (>= 0.15.3)
+Title: What the Package Does (one line, title case)
+Version: 0.0.0.9000
+Authors@R: person("First", "Last", , "first.last@example.com", role = c("aut", "cre"))
+Description: What the package does (one paragraph)
+Depends: R (>= 3.1.1)
+License: What license is it under?
+LazyData: true
