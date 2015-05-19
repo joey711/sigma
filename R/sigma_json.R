@@ -21,7 +21,7 @@ sigma_json_generator <- function(nodeDataframe, edgeDataframe,
   # require("jsonlite")
   edges = edgeDataframe
   nodes = nodeDataframe
-  nodes$color <- unlist(palette[nodes$type])
+  nodes$color <- unlist(palette[as.character(nodes$type)])
   # Edges
   edges$size <- 1
   edges$type <- "tapered"
