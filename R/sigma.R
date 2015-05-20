@@ -35,7 +35,7 @@ sigma <- function(jsonData, drawEdges = TRUE, drawNodes = TRUE,
 }
 #' @import htmlwidgets
 #' @export
-sigmaOutput <- function(outputId, width = "100%", height = "400px") {
+sigmaOutput <- function(outputId, width = "100%", height = "800px") {
   shinyWidgetOutput(outputId, "sigma", width, height, package = "sigma")
 }
 #' @import htmlwidgets

@@ -15,11 +15,11 @@ HTMLWidgets.widget({
   settings: {
     edgeLabelSize: 'proportional',
     minEdgeSize:1,
-    maxEdgeSize:6,
+    maxEdgeSize:4,
     defaultEdgeLabelSize: 12,
     minNodeSize:3,
     maxNodeSize:8,
-    edgeLabelThreshold: 4
+    edgeLabelThreshold: 10
   }
 });
     // return it as part of our instance data
