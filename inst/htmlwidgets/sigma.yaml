@@ -4,6 +4,9 @@ dependencies:
     src: htmlwidgets/lib/sigma-1.0.3
     script: 
       - sigma.min.js
+      - jquery.min.js
       - plugins/sigma.renderers.customEdgeShapes.min.js
       - plugins/sigma.renderers.edgeLabels.min.js
       - plugins/sigma.parsers.json.min.js
+    stylesheet:
+      - styles.css
