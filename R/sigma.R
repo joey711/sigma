@@ -12,7 +12,7 @@
 #'
 #' @export
 sigma <- function(jsonData, drawEdges = TRUE, drawNodes = TRUE,
-                  width = NULL, height = NULL) {
+                  width = NULL, height = NULL, data_cols= NULL) {
 
   # Convert the gexf object to character vector
   data <- jsonData
@@ -20,7 +20,8 @@ sigma <- function(jsonData, drawEdges = TRUE, drawNodes = TRUE,
   # create a list that contains the settings
   settings <- list(
     drawEdges = drawEdges,
-    drawNodes = drawNodes
+    drawNodes = drawNodes,
+    data_cols = data_cols
   )
 
 
