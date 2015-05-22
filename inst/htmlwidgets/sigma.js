@@ -44,8 +44,14 @@ HTMLWidgets.widget({
 
     console.log(data);
     console.log(typeof data);
-    //jdata = JSON.parse(data);
-    jdata = data;
+    if (typeof data == "string")
+    { 
+      jdata = JSON.parse(data);
+    }
+    else
+    {
+    jdata = data;      
+    }
     nodeData = jdata['nodes'];
     edgeData = jdata['edges'];
     g = {nodes: nodeData, edges: edgeData};
