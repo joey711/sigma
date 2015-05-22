@@ -33,17 +33,19 @@ $( document ).ready(function() {
 
 var starter = setTimeout(update_box, 20); 
 
-//Remove popups on scroll
-var sigma_mouse = $(".sigma-mouse");
-sigma_mouse.bind("mousewheel", function(){
-$("table").remove();
-open_nodes = [];
-});
 
 });
 
 
 function data_popups(sig) {
+
+	//Remove popups on scroll
+	var sigma_mouse = $(".sigma-mouse");
+	sigma_mouse.bind("mousewheel", function(){
+	$("table").remove();
+	open_nodes = [];
+	});
+
 	window.sigma_global = sig;
 
 	//Popup mouse overs
@@ -73,7 +75,7 @@ function data_popups(sig) {
       html_string = html_string + e.data.node.label;
       html_string = html_string + "</th></tr></thead><tbody>"; 
       var data_cols = sig.settings("data_cols");
-      if(typeof data_cols === 'undefined'){
+      if(typeof data_cols === 'undefined' || data_cols === null){
         var data_cols = ["label","id"];
       }
       $.each(data_cols, function( index, value ) {
