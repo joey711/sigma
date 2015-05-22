@@ -45,30 +45,29 @@ HTMLWidgets.widget({
     nodeData = jdata['nodes'];
     edgeData = jdata['edges'];
     g = {nodes: nodeData, edges: edgeData};
-    console.log(g);
     // update the sigma instance
 
 
-    console.log(JSON.stringify(g, null, 2));
     instance.sig.graph.clear();
     instance.sig.graph.read(g);
     instance.sig.refresh();
 
     //popup code
 
-    s.bind('overNode', function(e) {
+    instance.sig.bind('overNode', function(e) {
       document.body.style.cursor = "pointer";
     });
 
-    s.bind('outNode', function(e) {
+    instance.sig.bind('outNode', function(e) {
       document.body.style.cursor = "default";
     });
 
     var last_node = "";
-    s.bind('clickNode', function(e) {
+    instance.sig.bind('clickNode', function(e) {
       $("table").filterByData("node_id",e.data.node.id).remove();
-      var x1 = e.data.captor.clientX-110;
-      var y1 = e.data.captor.clientY;
+      var start_pos = $(".sigma").position()
+      var x1 = e.data.node['renderer1:x'] + $(".sigma").position()['left']-100;
+      var y1 = e.data.node['renderer1:y'] + $(".sigma").position()['top']+10;
       if (last_node != e.data.node.label)
       {
       last_node = e.data.node.label;
@@ -76,52 +75,23 @@ HTMLWidgets.widget({
       html_string = "<table class='ui celled striped small compact table' style='width:200px;height:200px'><thead><tr><th colspan='2'>";
       html_string = html_string + e.data.node.label;
       html_string = html_string + "</th></tr></thead><tbody>"; 
-      var data_cols = s.settings["data_cols"];
-      console.log(data_cols);
-      //var data_cols = ["id","label","size"];
+      var data_cols = instance.sig.settings("data_cols");
+      if(typeof data_cols === 'undefined'){
+        var data_cols = ["label","id"];
+      }
       $.each(data_cols, function( index, value ) {
        html_string = html_string + "<tr><td>" + data_cols[index] + "</td><td>"+ e.data.node[value] + "</td></tr>";
     });
 
       html_string = html_string + "</tbody></table>";
-      $(html_string).css( {position:"absolute", top:y1, left: x1}).appendTo("#container").data("node_id",e.data.node.id).data("start_x",x1).data("start_y",y1).data("c_x",s.camera.x).data("c_y",s.camera.y);
+      var sigma_obj = $(".sigma")[0];
+      $(html_string).css( {position:"absolute", top:y1, left: x1}).appendTo(sigma_obj).data("node_id",e.data.node.id).data("start_x",x1).data("start_y",y1).data("c_x",instance.sig.camera.x).data("c_y",instance.sig.camera.y);
       }
       else
       {
         last_node = "";
       }
     });
-
-
-    $.fn.filterByData = function(prop, val) {
-        return this.filter(
-            function() { return $(this).data(prop)==val; }
-        );
-    }
-
-    var starter = setTimeout(update_box, 20); 
-
-
-    function update_box() {
-      $('table').each(function() {
-        var dx =  $(this).data("c_x") - (s.camera.x);
-        var dy =  $(this).data("c_y") - (s.camera.y);
-        var x = $(this).data("start_x") + dx / s.camera.ratio;
-        var y = $(this).data("start_y") + dy / s.camera.ratio;
-        $(this).css({left:x, top:y});
-      });
-      // do some stuff...
-      tid = setTimeout(update_box, 10);
-    }
-
-    var myimage = document.getElementById("container").children[1];
-    myimage.addEventListener("mousewheel", MouseWheelHandler, true);
-
-    function MouseWheelHandler(e) {
-    $("table").remove();
-    last_node = "";
-    }
-
   },
 
   resize: function(el, width, height, instance) {
