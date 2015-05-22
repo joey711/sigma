@@ -19,7 +19,8 @@ HTMLWidgets.widget({
     defaultEdgeLabelSize: 12,
     minNodeSize:3,
     maxNodeSize:8,
-    edgeLabelThreshold: 10
+    doubleClickEnabled:false,
+    edgeLabelThreshold: 100
   }
 });
     // return it as part of our instance data
