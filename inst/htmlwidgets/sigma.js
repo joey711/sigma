@@ -42,7 +42,9 @@ HTMLWidgets.widget({
       instance.sig.settings(name, x.settings[name]);
     }
 
-    jdata = JSON.parse(data);
+    console.log(data);
+    console.log(typeof data);
+    //jdata = JSON.parse(data);
     nodeData = jdata['nodes'];
     edgeData = jdata['edges'];
     g = {nodes: nodeData, edges: edgeData};
