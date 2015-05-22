@@ -5,6 +5,7 @@ dependencies:
     script: 
       - sigma.min.js
       - jquery.min.js
+      - popup.js
       - plugins/sigma.renderers.customEdgeShapes.min.js
       - plugins/sigma.renderers.edgeLabels.min.js
       - plugins/sigma.parsers.json.min.js
