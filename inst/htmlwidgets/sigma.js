@@ -19,7 +19,8 @@ HTMLWidgets.widget({
     defaultEdgeLabelSize: 12,
     minNodeSize:3,
     maxNodeSize:8,
-    edgeLabelThreshold: 10
+    doubleClickEnabled:false,
+    edgeLabelThreshold: 100
   }
 });
     // return it as part of our instance data
@@ -41,7 +42,10 @@ HTMLWidgets.widget({
       instance.sig.settings(name, x.settings[name]);
     }
 
-    jdata = JSON.parse(data);
+    console.log(data);
+    console.log(typeof data);
+    //jdata = JSON.parse(data);
+    jdata = data;
     nodeData = jdata['nodes'];
     edgeData = jdata['edges'];
     g = {nodes: nodeData, edges: edgeData};
