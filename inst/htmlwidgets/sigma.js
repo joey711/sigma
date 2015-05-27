@@ -16,6 +16,7 @@ HTMLWidgets.widget({
     edgeLabelSize: 'proportional',
     minEdgeSize:1,
     maxEdgeSize:4,
+    labelThreshold:3,
     defaultEdgeLabelSize: 12,
     minNodeSize:3,
     maxNodeSize:8,
