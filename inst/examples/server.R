@@ -19,7 +19,8 @@ shinyServer(function(input, output) {
   })
   
   output$jsplot_sigma1 <- renderSigma({
-    sigma(sigma_json_generator(nodes, edges))#, data_cols = c("size", "y"))
+    inodes = nodes[nodes$type %in% input$type, ]
+    sigma(sigma_json_generator(inodes, edges), data_cols = input$hover)
   })
 
 })

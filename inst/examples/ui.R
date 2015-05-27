@@ -9,16 +9,15 @@ shinyUI(fluidPage(
   # Sidebar with a slider input for the number of bins
   sidebarLayout(
     sidebarPanel(
-      sliderInput("bins",
-                  "Number of bins:",
-                  min = 1,
-                  max = 50,
-                  value = 30)
+      selectInput("type", "Type", multiple = TRUE,
+                  choices = as.character(unique(nodes$type)),
+                  selected = as.character(unique(nodes$type))),
+      selectInput("hover", "Node Hover", multiple = TRUE,
+                  choices = colnames(nodes), selected = colnames(nodes))
     ),
 
     # Show a plot of the generated distribution
     mainPanel(
-      plotOutput("distPlot"),
       sigma::sigmaOutput("jsplot_sigma1")
     )
   )
