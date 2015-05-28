@@ -32,6 +32,25 @@ HTMLWidgets.widget({
 
   renderValue: function(el, x, instance) {
 
+    instance.sig.kill();
+    instance.sig = new sigma({
+  renderer: {
+    container: document.getElementById(el.id),
+    type: 'canvas'
+  },
+  settings: {
+    edgeLabelSize: 'proportional',
+    minEdgeSize:1,
+    maxEdgeSize:4,
+    labelThreshold:3,
+    defaultEdgeLabelSize: 12,
+    minNodeSize:3,
+    maxNodeSize:8,
+    doubleClickEnabled:false,
+    edgeLabelThreshold: 100
+  }
+});
+    instance.sig.renderers[0].prefix="renderer1:";
     // parse gexf data
 /*    var parser = new DOMParser();
     var data = parser.parseFromString(x.data, "application/xml");
@@ -43,8 +62,6 @@ HTMLWidgets.widget({
       instance.sig.settings(name, x.settings[name]);
     }
 
-    console.log(data);
-    console.log(typeof data);
     if (typeof data == "string")
     { 
       jdata = JSON.parse(data);
@@ -58,7 +75,8 @@ HTMLWidgets.widget({
     g = {nodes: nodeData, edges: edgeData};
     // update the sigma instance
 
-
+    $("table").remove();
+    open_nodes = [];
     instance.sig.graph.clear();
     instance.sig.graph.read(g);
     instance.sig.refresh();

@@ -47,7 +47,6 @@ function data_popups(sig) {
 	});
 
 	window.sigma_global = sig;
-
 	//Popup mouse overs
 	sig.bind('overNode', function(e) {
       document.body.style.cursor = "pointer";
@@ -64,8 +63,24 @@ function data_popups(sig) {
       //position table below node
       var start_pos = $(".sigma").position()
       //-100 centers table
-      var x1 = e.data.node['renderer1:x'] + $(".sigma").position()['left']-100;
-      var y1 = e.data.node['renderer1:y'] + $(".sigma").position()['top']+e.data.node['renderer1:size'];
+      for (key in sigma_global.graph.nodes()[0])
+      {
+      if (key.indexOf("renderer") > -1 && key.indexOf("x") > -1)
+      {
+      var r_x = key;
+      }
+      else if (key.indexOf("renderer") > -1 && key.indexOf("y") > -1)
+      {
+      var r_y = key;
+      }
+      else if (key.indexOf("renderer") > -1 && key.indexOf("size") > -1)
+      {
+      var r_size = key;
+      }
+      }
+
+      var x1 = e.data.node[r_x] + $(".sigma").position()['left']-100;
+      var y1 = e.data.node[r_y] + $(".sigma").position()['top']+e.data.node[r_size];
       //If this node doesn't have a table open
       if (open_nodes.indexOf(e.data.node.id) == "-1")
       {
